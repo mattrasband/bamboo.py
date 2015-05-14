@@ -92,7 +92,7 @@ def get_vcs_branch_name_from_cwd():
         output, err = proc.communicate()
         if proc.returncode == 0:
             return output.strip()
-    return ''
+    return None
 
 
 def clean_branch_name(branch_name):
@@ -100,7 +100,7 @@ def clean_branch_name(branch_name):
     Clean the branch name for the URL, this isn't a standard urlencode,
     as bamboo drops slashes in favor of hyphens.
     '''
-    return re.sub(r' ', '%20', re.sub(r'/', '-', branch_name))
+    return re.sub(r' ', '%20', re.sub(r'/', '-', branch_name.decode()))
 
 
 def query_build_result(server, project_key, build_key, branch_name):
@@ -204,8 +204,11 @@ def main():
         result = parse_result_json(build_result)
         print_result(result, args.verbose)
         sys.exit(result.status())
+    except requests.exceptions.HTTPError as e:
+        print('Error with request:', e)
+        sys.exit(ExitCode.EXEC_ERR)
     except Exception as e:
-        print('Error locating branch, it may have not built yet:', e)
+        print('Error locating branch, it may have not built yet?', e)
         sys.exit(ExitCode.EXEC_ERR)
 
 
