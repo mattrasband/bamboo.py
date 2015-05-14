@@ -51,9 +51,9 @@ class BuildResult(dict):
         Get a status code as to the result.
         :return: Failure(-1), Success(0), In Progress(1)
         '''
-        if self.passed in ['Success', 'Passed', 'Successful']:
+        if self.result in ['Success', 'Passed', 'Successful']:
             return ExitCode.PASSED
-        elif self.passed in 'In Progress':
+        elif self.result in 'In Progress':
             return ExitCode.IN_PROGRESS
         else:
             return ExitCode.FAILED
