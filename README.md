@@ -23,6 +23,8 @@ optional arguments:
   --verbose, -v      Verbose output. (default: False)
 ```
 
+It is worth noting that **the "project" and "plan" names may differ from what you see in the overall list on Bamboo** - this is often due to renaming projects/plans on Bamboo as the original key will be retained.  If you enter a specific plan, in your URL you can see at the end of the URL `project_key-plan_key`, that is what you should use, case sensitive.
+
 ### Result Codes
 
 To help integrate the script into a shell (say your bash prompt), there are C-Like return codes that have meaning.
