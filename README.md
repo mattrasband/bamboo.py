@@ -1,3 +1,7 @@
+### Notice
+
+This project has been abandoned, I no longer work with Bamboo and have no real way to improve it.
+
 ### Script
 
 With `pip` you can simply install this with: `pip install git+git://github.com/mrasband/bamboo.py`.
